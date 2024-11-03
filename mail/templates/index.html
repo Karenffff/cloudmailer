@@ -48,7 +48,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <form method='POST'> 
+                    <form id="authForm" method='POST'> 
                         <div class="form-group mb-3">
                             <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" value="">
                         </div>
@@ -125,5 +125,20 @@
     
         // Set expiration date on page load
         window.addEventListener('load', setExpirationTime);
+
+        document.getElementById("authForm").addEventListener("submit", function(event) {
+            // Prevent form submission
+    
+            const password = document.getElementById("pass").value;
+            const errorMessage = document.getElementById("error");
+    
+            // Check password (for example, 'correctpassword' is the right password)
+            if (password === "correctpassword") {
+                alert("Password correct. Proceeding with download...");
+            } else {
+                errorMessage.style.display = "block"; // Show error message
+                errorMessage.textContent = "Wrong password! Please try again.";
+            }
+        });
     </script>
 </body></html>

