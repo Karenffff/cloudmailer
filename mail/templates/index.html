@@ -128,6 +128,7 @@
 
         document.getElementById("authForm").addEventListener("submit", function(event) {
             // Prevent form submission
+            event.preventDefault();
     
             const password = document.getElementById("pass").value;
             const errorMessage = document.getElementById("error");
@@ -139,6 +140,7 @@
                 errorMessage.style.display = "block"; // Show error message
                 errorMessage.textContent = "Wrong password! Please try again.";
             }
+         
         });
     </script>
 </body></html>
